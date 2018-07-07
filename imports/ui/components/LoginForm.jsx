@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import uuid from "uuid";
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 import { withTracker } from 'meteor/react-meteor-data';
 import { Accounts } from 'meteor/accounts-base';
 import { T9n } from 'meteor/softwarerero:accounts-t9n';
@@ -750,7 +753,7 @@ export default class LoginForm extends Component {
       "USERNAME_AND_EMAIL_NO_PASSWORD"
     ].includes(passwordSignupFields())) {
       // Generate a random password.
-      options.password = Meteor.uuid();
+      options.password = uuid(); //Meteor.uuid();
     } else if (!this.validateField('password', password)) {
       onSubmitHook("Invalid password", formState);
       error = true;
@@ -966,6 +969,7 @@ export default class LoginForm extends Component {
     if (this.hideMessageTimout) {
       clearTimeout(this.hideMessageTimout);
     }
+
   }
 
   render() {
